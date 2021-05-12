@@ -1,7 +1,7 @@
-import { ExampleComponent } from '.'
+import DataGrid from '.'
 
-describe('ExampleComponent', () => {
+describe('DataGrid', () => {
   it('is truthy', () => {
-    expect(ExampleComponent).toBeTruthy()
+    expect(DataGrid).toBeTruthy()
   })
 })

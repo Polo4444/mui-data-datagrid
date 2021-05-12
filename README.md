@@ -13,15 +13,18 @@ npm install --save mui-data-datagrid
 ## Usage
 
 ```jsx
-import React, { Component } from 'react'
+import React from 'react'
 
-import MyComponent from 'mui-data-datagrid'
-import 'mui-data-datagrid/dist/index.css'
+import DataGrid from 'mui-data-datagrid'
 
-class Example extends Component {
-  render() {
-    return <MyComponent />
-  }
+function Example() {
+
+  return (
+    <DataGrid 
+      columns={columns}
+      rows={rows}
+    />
+  )
 }
 ```
 

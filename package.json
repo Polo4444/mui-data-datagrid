@@ -49,5 +49,21 @@
   },
   "files": [
     "dist"
+  ],
+  "dependencies": {
+    "@material-ui/core": "^4.11.4",
+    "react-virtualized-auto-sizer": "^1.0.5",
+    "react-window": "^1.8.6"
+  },
+  "keywords": [
+    "mui",
+    "datagrid",
+    "virtualization",
+    "window",
+    "sort",
+    "data",
+    "grid",
+    "infinite",
+    "scroll"
   ]
 }
