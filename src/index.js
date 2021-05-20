@@ -83,6 +83,7 @@ function HeaderCellRenderer({ columnIndex, data, style }) {
     data.handleRequestSort(event, property)
   }
 
+
   return (
     <Box display="flex" alignItems="center" style={{ ...style, ...data.headerStyle, height: data.headerHeight }}>
       <Box pl={2}>
@@ -109,6 +110,11 @@ function HeaderCellRenderer({ columnIndex, data, style }) {
 // CellRenderer renders a cell
 function CellRenderer({ columnIndex, data, rowIndex, style }) {
 
+  const handleColumnID = (row, columnID) => {
+    return columnID.split('|').reduce((total, current) => total === '' ? row[current] : total[current], '')
+  }
+
+
   return (
     <Fragment>
       {rowIndex === 0 ?
@@ -120,7 +126,7 @@ function CellRenderer({ columnIndex, data, rowIndex, style }) {
         // Body rows
         <Box display="flex" alignItems="center" style={{ ...style, ...data.style, height: data.rowHeight - data.rowSpacing }}>
           <Box pl={2}>
-            {data.data[rowIndex - 1][data.columns[columnIndex].id]}
+            {handleColumnID(data.data[rowIndex - 1], data.columns[columnIndex].id)}
           </Box>
           <Box height={data.rowSpacing} />
         </Box>

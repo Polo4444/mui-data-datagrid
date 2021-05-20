@@ -8,6 +8,7 @@ function App() {
 
   const columns = [
     { id: '_Name', isNumeric: false, label: "Name", main: true },
+    { id: '_Attributes|_ReadOnly', isNumeric: false, label: " Attributes -> Read Only (Child key)" },
     { id: '_Visibility', isNumeric: false, label: "Visibility" },
     { id: 'actions', isNumeric: false, label: "Actions" },
   ]
@@ -20,7 +21,13 @@ function App() {
 
     let data = []
     for (let index = 0; index < 1000; index++) {
-      data = [...data, { _Name: 'test.png', _Visibility: 'Public', actions: <button onClick={handleOnClick}>Hi !</button> }]
+      data = [...data, {
+        _Name: 'test.png', _Visibility: 'Public',
+        _Attributes: {
+          _ReadOnly: 'No'
+        },
+        actions: <button onClick={handleOnClick}>Hi !</button>
+      }]
     }
     setRows(data)
   }, [])
