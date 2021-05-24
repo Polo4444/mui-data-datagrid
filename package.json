@@ -1,6 +1,6 @@
 {
   "name": "mui-data-datagrid",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Virtualized Material-UI DataGrid",
   "author": "Polo4444",
   "license": "MIT",
@@ -52,6 +52,7 @@
     "dist"
   ],
   "dependencies": {
+    "@material-ui/core": "^4.11.4",
     "react-virtualized-auto-sizer": "^1.0.5",
     "react-window": "^1.8.6",
     "react-window-infinite-loader": "^1.0.7"

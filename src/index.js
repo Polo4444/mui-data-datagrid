@@ -9,7 +9,6 @@ import AutoSizer from "react-virtualized-auto-sizer"
 import InfiniteLoader from "react-window-infinite-loader"
 
 const scrollbarWidth = 10
-const inifiniteLoaderKey = `ifnl-${Math.floor(Math.random() * 9999999999)}`
 
 const useStyles = makeStyles(theme => ({
   visuallyHidden: {
@@ -136,7 +135,10 @@ function CellRenderer({ columnIndex, data, rowIndex, style }) {
         // Body rows
         <Box display="flex" alignItems="center" className={data.className} style={{ ...style, height: data.rowHeight - data.rowSpacing }}>
           <Box pl={2}>
-            {data.isItemLoaded(rowIndex) ?
+            {data.columns[columnIndex].id === 'actions' && data.actions(data.data[rowIndex - 1])}
+            
+            {data.columns[columnIndex].id !== 'actions' &&
+              data.isItemLoaded(rowIndex) ?
               handleColumnID(data.data[rowIndex - 1], data.columns[columnIndex].id)
               :
               columnIndex === 0 && <CircularProgress size={20} />
@@ -186,7 +188,7 @@ function InfiniteScroller({ loadMoreFunc, hasMore, loadingMore, rowsCount, child
 export default function DataGrid({
 
   // Data props
-  columns = [], rows = [],
+  columns = [], rows = [], actions=null,
 
   // Sort props
   order, orderBy,
@@ -317,6 +319,7 @@ export default function DataGrid({
 
                 itemData={{
                   data: stableSort(rows, getComparator(sort, sortBy)), columns: columns, rowHeight: rowHeight, rowSpacing: rowSpacing,
+                  actions: actions,
                   headerHeight: headerHeight,
                   sort: sort, sortBy: sortBy, handleRequestSort: handleRequestSort,
                   className: !cellClass ? classes.DGridCell : cellClass,

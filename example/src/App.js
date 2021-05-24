@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 
 import DataGrid from 'mui-data-datagrid'
 import { Box, makeStyles, Typography, useTheme } from '@material-ui/core'
@@ -13,6 +13,27 @@ const useStyles = makeStyles(theme => ({
     borderBottom: `1px solid ${theme.palette.primary.main}66`
   }
 }))
+
+function DataActions(row) {
+  
+  const handleOnClick = () => {
+    alert('Hi !')
+  }
+
+  const handleInfiniteScrollClick = () => {
+    alert('I was added by infinite scroll')
+  }
+
+  return (
+    <>
+      {row._Name === 'test.png' ?
+        <button onClick={handleOnClick}>Hi !</button>
+        :
+        <button onClick={handleInfiniteScrollClick}>I'm new !</button>
+      }
+    </>
+  )
+}
 
 function App() {
 
@@ -30,14 +51,6 @@ function App() {
     { id: 'actions', isNumeric: false, label: "Actions" },
   ]
 
-  const handleOnClick = () => {
-    alert('Hi !')
-  }
-
-  const handleInfiniteScrollClick = () => {
-    alert('I was added by infinite scroll')
-  }
-
   const loadMoreAction = () => {
 
 
@@ -50,15 +63,14 @@ function App() {
     setTimeout(() => {
 
       let data = []
-      for (let index = 0; index < 10000; index++) {
+      for (let index = 0; index < 100; index++) {
         data = rows.length <= 0 ?
           [...data, {
             _id: Math.floor(Math.random() * 9999999999),
             _Name: 'test.png', _Visibility: 'Public',
             _Attributes: {
               _ReadOnly: 'No'
-            },
-            actions: <button onClick={handleOnClick}>Hi !</button>
+            }
           }]
           :
           [...data, {
@@ -66,8 +78,7 @@ function App() {
             _Name: 'InfiniteScrollRow.png', _Visibility: 'Public',
             _Attributes: {
               _ReadOnly: 'Yes'
-            },
-            actions: <button onClick={handleInfiniteScrollClick}>I'm new !</button>
+            }
           }]
       }
 
@@ -75,7 +86,7 @@ function App() {
       setLoadingMore(false)
       setHasMore(true)
       setRows(rows.concat(data))
-    }, 3000)
+    }, 2000)
 
 
   }
@@ -98,12 +109,12 @@ function App() {
   }, []) */
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', width: '100%', height: '100vh', backgroundColor: '#F8F9FF' }}>
+    <div style={{ display: 'flex', flexDirection: 'column', width: '100%', height: '99vh', backgroundColor: '#F8F9FF' }}>
 
       <Typography style={{ margin: theme.spacing(2) }}>{rows.length} rows</Typography>
       <Box display="flex" flexDirection="column" flexGrow={1} >
         <DataGrid
-          columns={columns} rows={rows}
+          columns={columns} rows={rows} actions={DataActions}
           headerCellClass={classes.DGridHeaderCell} cellClass={classes.DGridCell}
           headerHeight={60} rowHeight={100} rowSpacing={20}
           loadMoreFunc={loadMoreAction} hasMore={hasMore} loadingMore={loadingMore}
